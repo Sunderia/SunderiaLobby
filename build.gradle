@@ -1,0 +1,66 @@
+plugins {
+    id 'java'
+    id 'kr.entree.spigradle' version '2.2.4'
+    id "com.github.johnrengelman.shadow" version "7.1.2"
+}
+
+apply from: rootProject.file('specialSource.gradle')
+
+group 'fr.sunderia'
+version '1.0.0'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven {
+        name "codemc-repo"
+        url "https://repo.codemc.org/repository/maven-public/"
+    }
+    protocolLib()
+}
+
+dependencies {
+    implementation 'io.github.leonardosnt:bungeechannelapi:1.0.0-SNAPSHOT'
+    //compileOnly spigot('1.18.1')
+    compileOnly "org.spigotmc:spigot:1.18.1-R0.1-SNAPSHOT:remapped-mojang"
+    compileOnly protocolLib("4.7.0")
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+shadowJar {
+    relocate "io.github.leonardosnt.bungeechannelapi", "fr.sunderia.bungeechannelapi"
+}
+
+tasks.prepareSpigotPlugins.dependsOn shadowJar
+
+afterEvaluate {
+    shadowJar {
+        doLast {
+            def outputFiles = outputs.files.files
+            for (inputFile in outputFiles) {
+                File intermediateFile = new File(temporaryDir, inputFile.name.replace('.jar', '-obf.jar'))
+                File outputFile = inputFile
+                remapMojangToSpigot(inputFile, intermediateFile, outputFile, "1.18.1-R0.1-SNAPSHOT")
+            }
+        }
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+spigot {
+    debug {
+        args '--nojline', '--max-players', '100'
+        jvmArgs '-Xmx4G'
+        serverPort 25565
+        eula = true
+    }
+    authors "minemobs"
+    apiVersion "1.18"
+    depends "ProtocolLib"
+}
+
+tasks.configSpigot.enabled = false
