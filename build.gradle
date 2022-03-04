@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'kr.entree.spigradle' version '2.2.4'
+    id 'kr.entree.spigradle' version '2.3.4'
     id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'io.github.leonardosnt:bungeechannelapi:1.0.0-SNAPSHOT'
+    shadow 'io.github.leonardosnt:bungeechannelapi:1.0.0-SNAPSHOT'
     //compileOnly spigot('1.18.1')
     compileOnly "org.spigotmc:spigot:1.18.1-R0.1-SNAPSHOT:remapped-mojang"
     compileOnly protocolLib("4.7.0")
@@ -33,6 +33,11 @@ shadowJar {
 }
 
 tasks.prepareSpigotPlugins.dependsOn shadowJar
+tasks.runSpigot.dependsOn prepareSpigotPlugins
+
+shadowJar {
+    configurations = [project.configurations.runtimeClasspath, project.configurations.shadow]
+}
 
 afterEvaluate {
     shadowJar {

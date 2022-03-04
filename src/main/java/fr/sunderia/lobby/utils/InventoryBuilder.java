@@ -1,7 +1,7 @@
-package fr.sunderia.sunderialobby.utils;
+package fr.sunderia.lobby.utils;
 
-import fr.sunderia.sunderialobby.MenuItems;
-import fr.sunderia.sunderialobby.SunderiaLobby;
+import fr.sunderia.lobby.MenuItems;
+import fr.sunderia.lobby.SunderiaLobby;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -20,8 +20,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class InventoryBuilder implements Listener {
 
+    private final int spacing;
     private int rows = 3;
-    private int spacing;
     private String name;
     private final List<ItemStack> itemStacks;
     private Consumer<InventoryClickEvent> clickEventConsumer = InventoryEvent::getInventory;
@@ -73,7 +73,6 @@ public class InventoryBuilder implements Listener {
         return this;
     }
 
-
     public InventoryBuilder setCancelled() {
         this.cancelEvent = !cancelEvent;
         return this;
@@ -81,7 +80,7 @@ public class InventoryBuilder implements Listener {
 
     @EventHandler
     private void onClick(InventoryClickEvent event) {
-        if (event.getInventory().getSize() != getSize() || !event.getView().getTitle().equalsIgnoreCase(name)) return;
+        if (event.getInventory().getType() != InventoryType.CHEST || event.getInventory().getSize() != getSize() || !event.getView().getTitle().equalsIgnoreCase(name)) return;
         event.setCancelled(cancelEvent);
         this.clickEventConsumer.accept(event);
     }

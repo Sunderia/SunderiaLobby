@@ -1,13 +1,12 @@
-package fr.sunderia.sunderialobby;
+package fr.sunderia.lobby;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.events.PacketContainer;
 import com.comphenix.protocol.wrappers.BlockPosition;
 import com.comphenix.protocol.wrappers.WrappedBlockData;
-import com.comphenix.protocol.wrappers.WrappedGameProfile;
-import fr.sunderia.sunderialobby.manager.NPCManager;
-import fr.sunderia.sunderialobby.utils.ItemBuilder;
-import fr.sunderia.sunderialobby.utils.LocationUtils;
+import fr.sunderia.lobby.manager.NPCManager;
+import fr.sunderia.lobby.utils.ItemBuilder;
+import fr.sunderia.lobby.utils.LocationUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -19,6 +18,8 @@ import org.bukkit.inventory.ItemStack;
 import java.lang.reflect.InvocationTargetException;
 
 public class Items {
+
+    private Items() {}
 
     public static final NPCManager npcManager = SunderiaLobby.getInstance().getNpcManager();
 
@@ -49,12 +50,8 @@ public class Items {
         }
     }).build();
 
-    public static final ItemStack NPC_SPAWNER = new ItemBuilder(Material.FEATHER).setDisplayName(ChatColor.GOLD + "NPC Spawner").onInteract(event -> {
-        npcManager.spawnNPC(event.getPlayer());
-    }).build();
-
     public static final ItemStack NPC_REMOVER = new ItemBuilder(Material.FEATHER).setDisplayName(ChatColor.RED + "NPC Remover").onInteract(event -> {
-
+        //TODO
     }).build();
 
 

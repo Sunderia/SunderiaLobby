@@ -1,6 +1,6 @@
-package fr.sunderia.sunderialobby;
+package fr.sunderia.lobby;
 
-import fr.sunderia.sunderialobby.utils.ItemBuilder;
+import fr.sunderia.lobby.utils.ItemBuilder;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -19,7 +19,6 @@ public enum MenuItems {
     ;
 
     private final String itemName, serverName;
-    private final ItemBuilder builder;
     private final ItemStack stack;
 
     MenuItems(ItemBuilder builder, String serverName) {
@@ -28,7 +27,6 @@ public enum MenuItems {
 
     MenuItems(String itemName, ItemBuilder itemBuilder, String serverName) {
         this.itemName = itemName;
-        this.builder = itemBuilder;
         this.serverName = serverName;
         this.stack = itemBuilder.build();
     }

@@ -1,9 +1,11 @@
-package fr.sunderia.sunderialobby.utils;
+package fr.sunderia.lobby.utils;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 public class ItemStackUtils {
+
+    private ItemStackUtils() {}
 
     public static final ItemStack AIR = new ItemStack(Material.AIR);
 

@@ -1,6 +1,6 @@
-package fr.sunderia.sunderialobby.utils;
+package fr.sunderia.lobby.utils;
 
-import fr.sunderia.sunderialobby.SunderiaLobby;
+import fr.sunderia.lobby.SunderiaLobby;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
@@ -41,8 +41,7 @@ public class ItemBuilder implements Listener {
     public ItemBuilder setColor(Color color) {
         if(!(stack.getItemMeta() instanceof LeatherArmorMeta meta)) return this;
         meta.setColor(color);
-        setItemMeta(meta);
-        return this;
+        return setItemMeta(meta);
     }
 
     public ItemBuilder onInteract(Consumer<PlayerInteractEvent> eventConsumer) {
@@ -63,7 +62,7 @@ public class ItemBuilder implements Listener {
             } else {
                 addEnchant(Enchantment.PROTECTION_EXPLOSIONS, 1);
             }
-            addItemFlag(ItemFlag.HIDE_ENCHANTS);
+            return addItemFlag(ItemFlag.HIDE_ENCHANTS);
         } else {
             ItemMeta meta = getItemMeta();
             for(Enchantment enchantment : meta.getEnchants().keySet()) {
@@ -99,15 +98,13 @@ public class ItemBuilder implements Listener {
         if(!(stack.getItemMeta() instanceof SkullMeta meta)) return this;
         if(!meta.hasOwner()) return this;
         meta.setOwningPlayer(player);
-        setItemMeta(meta);
-        return this;
+        return setItemMeta(meta);
     }
 
     public ItemBuilder setDisplayName(String displayName) {
         ItemMeta meta = getItemMeta();
         meta.setDisplayName(displayName);
-        setItemMeta(meta);
-        return this;
+        return setItemMeta(meta);
     }
 
     public ItemBuilder setItemStack(ItemStack stack) {
@@ -118,8 +115,7 @@ public class ItemBuilder implements Listener {
     public ItemBuilder setLore(List<String> lore) {
         ItemMeta meta = getItemMeta();
         meta.setLore(lore);
-        setItemMeta(meta);
-        return this;
+        return setItemMeta(meta);
     }
 
     public ItemBuilder setLore(String lore) {
@@ -127,15 +123,13 @@ public class ItemBuilder implements Listener {
         loreList.add(lore);
         ItemMeta meta = getItemMeta();
         meta.setLore(loreList);
-        setItemMeta(meta);
-        return this;
+        return setItemMeta(meta);
     }
 
     public ItemBuilder addEnchant(Enchantment enchantment, int level) {
         ItemMeta meta = getItemMeta();
         meta.addEnchant(enchantment, level, true);
-        setItemMeta(meta);
-        return this;
+        return setItemMeta(meta);
     }
 
     public ItemBuilder addProtection(int level) {
@@ -146,8 +140,7 @@ public class ItemBuilder implements Listener {
     public ItemBuilder addItemFlag(ItemFlag flag) {
         ItemMeta meta = getItemMeta();
         meta.addItemFlags(flag);
-        setItemMeta(meta);
-        return this;
+        return setItemMeta(meta);
     }
 
     public ItemBuilder addItemFlag(ItemFlag... flags) {
@@ -160,8 +153,7 @@ public class ItemBuilder implements Listener {
     public ItemBuilder setCustomModelData(int customModelData) {
         ItemMeta meta = getItemMeta();
         meta.setCustomModelData(customModelData);
-        setItemMeta(meta);
-        return this;
+        return setItemMeta(meta);
     }
 
     public ItemStack build() {

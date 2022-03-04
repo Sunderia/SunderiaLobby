@@ -1,4 +1,4 @@
-package fr.sunderia.sunderialobby.utils;
+package fr.sunderia.lobby.utils;
 
 import com.google.common.collect.ImmutableList;
 import org.bukkit.Location;

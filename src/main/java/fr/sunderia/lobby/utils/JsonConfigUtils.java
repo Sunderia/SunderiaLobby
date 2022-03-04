@@ -1,10 +1,8 @@
-package fr.sunderia.sunderialobby.utils;
+package fr.sunderia.lobby.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
-import com.mojang.authlib.properties.PropertyMap;
-import fr.sunderia.sunderialobby.manager.NPCManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +16,7 @@ public class JsonConfigUtils {
     private final File file;
     private final Gson gson;
 
-    public static record TypeAdapter(Class<?> clazz, Object instance){}
+    public record TypeAdapter(Class<?> clazz, Object instance) {}
 
     public JsonConfigUtils(File file, TypeAdapter... adapters) throws IOException {
         this.file = file;
